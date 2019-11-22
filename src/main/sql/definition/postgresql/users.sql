@@ -35,5 +35,19 @@ grant all on schema basemap_green to stratum;
 create schema basemap_read authorization stratum;
 grant all on schema basemap_read to stratum;
 grant usage on schema basemap_read to public;
+-- catalog for tracking
+create schema stratum_catalog authorization stratum;
+grant all on schema stratum_catalog to stratum;
+grant usage on schema stratum_catalog to public;
 select 'toot the horn for the schemas and owners on ' || current_catalog;
-\dn
+select 
+    a.catalog_name
+   ,a.schema_name
+   ,a.schema_owner
+from 
+    information_schema.schemata a 
+where
+    a.schema_owner = 'stratum' 
+and a.catalog_name = current_catalog
+order by 
+    a.schema_name;

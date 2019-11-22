@@ -1,8 +1,8 @@
-# STRATUM
+# Stratum
 
 Data management and integration of layers under a DoITT GIS
 [stratus](https://github.com/planetlabs/stratus) deployment.  This is our 
-database, our rules, the trick is to never be afraid.
+database, our rules, make it go viral friends.
 
 # Dependencies
 
@@ -22,23 +22,34 @@ or users be sure to externalize them.
     $ export PGPASSWORD=PostGisIsMyDatabae!
     $ export PGHOST=aws.dollar.dollar.bill
 
-Then run this.  Replace the new user password below with yours, make a note.
+Then run users.sql.  Replace the new stratum user password below, make a note.
 
 Uncomment line 2 if you are re-running and wish to start from scratch.
 
     $ export STRATUMPASSWORD=BeMyDataBae!
-    $ #psql -f ./src/main/sql/definition/postgresql/teardown-users.sql 
+    $ #psql -t -f ./src/main/sql/definition/postgresql/teardown-users.sql 
     $ psql -t -v v1=$STRATUMPASSWORD -v v2=$PGDATABASE -f ./src/main/sql/definition/postgresql/users.sql
 
 # Provision Database Tables and Support Objects
 
-    Coming right up
-    
+We will connect as the 'stratum' user and create objects under each schema. 
+Export the stratum user password.
+
+Uncomment line 3 if you want to drop all objects and then re-create.
+
+    $ export PGDATABASE=bse
+    $ export PGPASSWORD=BeMyDataBae!
+    $ #psql -t -f ./src/main/sql/definition/postgresql/teardown-schema.sql 
+    $ psql -t -f ./src/main/sql/definition/postgresql/schema.sql
+
+
 # Integration Tests
 
-    Coming soon
+    Requires python 3+ in addition to psql.
 
-# Teardown Testing Environment
+    Should succeed for a public user on the database but stratum user is fine
+    too. Externalize connection details.
 
-    Probably
-
+    $ export PGDATABASE=bse
+    $ export PGPASSWORD=BeMyDataBae!
+    $ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"

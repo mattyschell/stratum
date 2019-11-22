@@ -12,6 +12,7 @@ drop schema if exists taxmap_read;
 drop schema if exists basemap_blue;
 drop schema if exists basemap_green;
 drop schema if exists basemap_read;
+drop schema if exists stratum_catalog;
 -- confusing, owned is privs
 reassign owned by stratum to postgres;
 drop owned by stratum;  
