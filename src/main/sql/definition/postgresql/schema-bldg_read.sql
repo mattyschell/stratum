@@ -29,17 +29,21 @@ create or replace view building (
 from bldg_blue.building;
 grant select on building to public;
 insert into stratum_catalog.st_catalog (
-    relation_name
-   ,relation_schema
+    dataset_name
+   ,dataset_schema
    ,storage_name
    ,storage_schema
-   ,created
-   ,last_updated)
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
 values (
     'building'
    ,current_schema
+   ,'bldg_blue'
    ,'building'
-   ,'building_blue'
-   ,now()
+   ,null
+   ,'NYC Dept. of Information Technology and Telecommunications' 
+   ,null
    ,now()
 );

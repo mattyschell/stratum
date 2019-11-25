@@ -14,20 +14,25 @@ create table building (
    ,shape               geometry(multipolygon, 2263)
 ); 
 create index buildingshape on building using GIST(shape);
+alter table building alter column shape set not null;
 create index buildingbase_bbl on building (base_bbl);
 create index buildingmappluto_bbl on building (mappluto_bbl);
 insert into stratum_catalog.st_catalog (
-    relation_name
-   ,relation_schema
+    dataset_name
+   ,dataset_schema
    ,storage_name
    ,storage_schema
-   ,created
-   ,last_updated)
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
 values (
     'building'
    ,current_schema
    ,null
    ,null
-   ,now()
+   ,null
+   ,'NYC Dept. of Information Technology and Telecommunications'
+   ,null
    ,now()
 );

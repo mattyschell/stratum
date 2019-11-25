@@ -1,30 +1,34 @@
 create table st_catalog (
-	id                  serial primary key
-   ,relation_name       varchar(64) not null
-   ,relation_schema     varchar(64) not null
-   ,storage_name        varchar(64)
-   ,storage_schema      varchar(64)
-   ,created             timestamp
-   ,last_updated        timestamp
-   ,unique (relation_name, relation_schema)
+	id                      serial primary key
+   ,dataset_name            varchar(64) not null
+   ,dataset_schema          varchar(64) not null
+   ,storage_name            varchar(64)
+   ,storage_schema          varchar(64)
+   ,dataset_updated         timestamp
+   ,source_agency           varchar(128)    
+   ,spatial_reference       integer
+   ,table_created           timestamp
+   ,unique (dataset_name, dataset_schema)
 );
 create or replace view stratum_catalog (
-    id
-   ,relation_name
-   ,relation_schema
-   ,relation_database
+	id
+   ,dataset_name
+   ,dataset_schema
    ,storage_name
    ,storage_schema
-   ,created
-   ,last_updated
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created
 ) as select
    	id
-   ,relation_name
-   ,relation_schema
+   ,dataset_name
    ,current_catalog 
    ,storage_name
    ,storage_schema
-   ,created             
-   ,last_updated        
+   ,dataset_updated
+   ,source_agency
+   ,spatial_reference
+   ,table_created       
 from st_catalog;
 grant select on stratum_catalog to public;
