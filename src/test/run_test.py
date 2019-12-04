@@ -16,7 +16,8 @@ class dbi(object):
         
     def sql(self
            ,sqlfile):
-                    
+
+        #tupes only, ignore user startup file, unaligned output        
         psqlcmd = "psql -tXA "
         psqlcmd += "-h {0} -U {1} -d {2} -f {3}".format(self.dbhost
                                                        ,self.dbuser
@@ -29,7 +30,9 @@ class dbi(object):
 
         output = p1.communicate()[0]
 
-        return output.strip()        
+        # \l for UTF8 reminder friend
+        # in python3 we must decode or we get b'asciibytedata'
+        return output.strip().decode('utf-8')        
 
 
 class dossier(object):
@@ -87,7 +90,7 @@ def run_simple_test(testscript
         raise ValueError(msg)
 
     # these should be set but lets pass them in for debugging and overrides
-    # if necessary
+    # and reminders to self 
     pghost = os.getenv('PGHOST', 'localhost') 
     pgdatabase = os.getenv('PGDATABASE', 'bse')
     pguser = os.getenv('PGUSER', 'stratum')
@@ -110,7 +113,7 @@ def run_simple_test(testscript
             print ("{0}{1}".format('   '
                                  ,dirtyline)) 
     else:
-        print ("{0}".format('.'))
+        print ("{0}".format('. OK'))
 
 
 if __name__ == "__main__":

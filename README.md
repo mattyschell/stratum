@@ -32,24 +32,26 @@ Uncomment line 2 if you are re-running and wish to start from scratch.
 
 # Provision Database Tables and Support Objects
 
-We will connect as the 'stratum' user and create objects under each schema. 
-Export the stratum user password.
+We will connect as the newly created 'stratum' user and create empty database
+objects under each schema. Export the stratum user password as the standard 
+PGPASSWORD.
 
 Uncomment line 3 if you want to drop all objects and then re-create.
 
     $ export PGDATABASE=bse
-    $ export PGPASSWORD=BeMyDataBae!
+    $ export PGPASSWORD=PostGisIsMyDatabae!
     $ #psql -t -f ./src/main/sql/definition/postgresql/teardown-schema.sql 
     $ psql -t -f ./src/main/sql/definition/postgresql/schema.sql
 
 
 # Integration Tests
 
-    Requires python 3+ in addition to psql.
+Tests that everything was created as expected.  Should succeed for any user with
+public role access on the database.  The stratum user is fine too. Externalize 
+connection details.
 
-    Should succeed for a public user on the database but stratum user is fine
-    too. Externalize connection details.
+Requires python 3+ in addition to psql.
 
     $ export PGDATABASE=bse
     $ export PGPASSWORD=BeMyDataBae!
-    $ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"
+    $ ./src/test/run_all_tests.sh

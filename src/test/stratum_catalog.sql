@@ -1,7 +1,7 @@
 select 
-    relation_database || '.' || relation_schema || '.' || relation_name 
+    dataset_database || '.' || dataset_schema || '.' || dataset_name 
 from 
     stratum_catalog.stratum_catalog
-order by relation_database
-        ,relation_schema
-        ,relation_name;
+order by dataset_database
+        ,dataset_schema
+        ,dataset_name;
