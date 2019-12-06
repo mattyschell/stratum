@@ -1,5 +1,7 @@
+--bldg_blue.bldg
+--bldg_read.building etc
 select 
-    table_catalog || '.' || table_schema || '.' || table_name
+    table_schema || '.' || table_name
 from 
     information_schema.tables
 where 
@@ -7,6 +9,5 @@ where
 and table_schema IN ('bldg_read'
                     ,'bldg_blue'
                     ,'bldg_green')
-order by table_catalog
-        ,table_schema
+order by table_schema
         ,table_name;

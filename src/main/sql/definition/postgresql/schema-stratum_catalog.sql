@@ -14,6 +14,7 @@ create or replace view stratum_catalog (
 	id
    ,dataset_name
    ,dataset_schema
+   ,dataset_database
    ,storage_name
    ,storage_schema
    ,dataset_updated
@@ -23,6 +24,7 @@ create or replace view stratum_catalog (
 ) as select
    	id
    ,dataset_name
+   ,dataset_schema
    ,current_catalog 
    ,storage_name
    ,storage_schema
