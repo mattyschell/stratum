@@ -19,13 +19,11 @@ stratum_xx dataset repos.
 Externalize all connection details using standard PostgreSQL default connection 
 parameter environmentals.
 
-```shell
-$ export PGDATABASE=gis
-$ export PGUSER=postgres
-$ export PGPORT=5433
-$ export PGPASSWORD=PostGisIsMyDatabae!
-$ export PGHOST=aws.dollar.dollar.bill
-```
+    $ export PGDATABASE=gis
+    $ export PGUSER=postgres
+    $ export PGPORT=5433
+    $ export PGPASSWORD=PostGisIsMyDatabae!
+    $ export PGHOST=aws.dollar.dollar.bill
 
 Our pattern for loading data into a cloud database or Minikube is to execute a 
 series of scripts from an init-data directory that sits next to all database 
@@ -44,10 +42,8 @@ only. Be sure to replace the new stratum user password below, make a note.
 Uncomment line 4 of sample_users.sh if you wish drop everything and start from 
 scratch.
 
-```shell
-$ export STRATUMPASSWORD=BeMyDataBaePostGis!
-$ ./sample_users.sh 
-```
+    $ export STRATUMPASSWORD=BeMyDataBaePostGis!
+    $ ./sample_users.sh 
 
 # Provision Database Tables and Support Objects Under Each Schema
 
@@ -57,32 +53,16 @@ Export your new stratum user password as the PGPASSWORD.
 Uncomment line 3 of sample_schema.sh if you want to drop all objects and 
 then re-create empty.
 
-```shell
-$ export PGPASSWORD=BeMyDataBaePostGis!
-$ ./sample_schema.sh
-```
+    $ export PGPASSWORD=BeMyDataBaePostGis!
+    $ ./sample_schema.sh
 
 # Integration Tests
 
-Requires python 3+ in addition to psql.
+    Requires python 3+ in addition to psql.
 
-Should succeed for a public user on the database but stratum user is fine
-too. Externalize connection details.
-
-```shell
-$ export PGDATABASE=gis
-$ export PGPASSWORD=BeMyDataBaePostGis!
-$ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"
-```
-
-# Integration Tests
-
-Tests that everything was created as expected.  Should succeed for any user with
-public role access on the database.  The stratum user is fine too. Externalize 
-connection details.
-
-Requires python 3+ in addition to psql.
+    Should succeed for a public user on the database but stratum user is fine
+    too. Externalize connection details.
 
     $ export PGDATABASE=gis
-    $ export PGPASSWORD=BeMyDataBae!
-    $ ../stratum/src/test/run_all_tests.sh
+    $ export PGPASSWORD=BeMyDataBaePostGis!
+    $ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"
