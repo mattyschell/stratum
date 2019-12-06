@@ -65,4 +65,4 @@ then re-create empty.
 
     $ export PGDATABASE=gis
     $ export PGPASSWORD=BeMyDataBaePostGis!
-    $ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"
+    $ ../stratum/src/test/run_all_tests.sh

@@ -10,27 +10,17 @@ create table st_catalog (
    ,table_created           timestamp
    ,unique (dataset_name, dataset_schema)
 );
-create or replace view stratum_catalog (
-	id
-   ,dataset_name
-   ,dataset_schema
-   ,dataset_database
-   ,storage_name
-   ,storage_schema
-   ,dataset_updated
-   ,source_agency    
-   ,spatial_reference
-   ,table_created
-) as select
-   	id
-   ,dataset_name
-   ,dataset_schema
-   ,current_catalog 
-   ,storage_name
-   ,storage_schema
-   ,dataset_updated
-   ,source_agency
-   ,spatial_reference
-   ,table_created       
+create or replace view stratum_catalog as
+select
+   	st_catalog.id
+   ,st_catalog.dataset_name
+   ,st_catalog.dataset_schema
+   ,current_catalog as dataset_database 
+   ,st_catalog.storage_name
+   ,st_catalog.storage_schema
+   ,st_catalog.dataset_updated
+   ,st_catalog.source_agency
+   ,st_catalog.spatial_reference
+   ,st_catalog.table_created       
 from st_catalog;
 grant select on stratum_catalog to public;
