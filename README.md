@@ -14,7 +14,8 @@ database, our rules, make it go viral friends.
 
 In a pre-existing database we will create a new 'stratum' user with the input 
 STRATUMPASSWORD. The stratum user will in turn create schemas for other 
-stratum_xx dataset repos.
+stratum_xx dataset repos. We'll also create a stratum_read user with read-only
+privileges for most uses in the [stratus](https://github.com/planetlabs/stratus) deployment.
 
 Externalize all connection details using standard PostgreSQL default connection 
 parameter environmentals.

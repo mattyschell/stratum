@@ -1,6 +1,8 @@
-select 'creating stratum user with user ' || current_user || ' on database ' || current_catalog || ' at ' || version();
+select 'creating stratum user from user ' || current_user || ' on database ' || current_catalog || ' at ' || version();
 create user stratum with password :'v1';
 grant all privileges on database :v2 to stratum;
+select 'creating stratum_read user from user ' || current_user || ' on database ' || current_catalog || ' at ' || version();
+create user stratum_read with password :'v1';
 create extension if not exists postgis;
 -- done with superuser
 set role stratum;
