@@ -1,2 +1,4 @@
-python3 ./src/test/run_test.py "./src/test/stratum_catalog.sql" "./src/test/catalog_expected"
-python3 ./src/test/run_test.py "./src/test/information_schema.sql" "./src/test/catalog_expected"
+export PGUSER='stratum'
+python3 ../stratum/src/test/run_test.py "../stratum/src/test/information_schema_schemata.sql" "../stratum/src/test/schemata_expected"
+python3 ../stratum/src/test/run_test.py "../stratum/src/test/stratum_catalog.sql" "../stratum/src/test/catalog_expected"
+python3 ../stratum/src/test/run_test.py "../stratum/src/test/information_schema_tables.sql" "../stratum/src/test/catalog_expected"

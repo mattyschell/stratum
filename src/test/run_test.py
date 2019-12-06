@@ -24,6 +24,8 @@ class dbi(object):
                                                        ,self.db
                                                        ,sqlfile)
 
+        #print(psqlcmd)
+        
         p1 = subprocess.Popen(psqlcmd
                              ,stdout=subprocess.PIPE
                              ,shell=True)
@@ -92,7 +94,7 @@ def run_simple_test(testscript
     # these should be set but lets pass them in for debugging and overrides
     # and reminders to self 
     pghost = os.getenv('PGHOST', 'localhost') 
-    pgdatabase = os.getenv('PGDATABASE', 'bse')
+    pgdatabase = os.getenv('PGDATABASE', 'gis')
     pguser = os.getenv('PGUSER', 'stratum')
 
     mydbi = dbi(pghost

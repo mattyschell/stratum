@@ -13,36 +13,67 @@ database, our rules, make it go viral friends.
 # Provision Stratum User and Schemas
 
 In a pre-existing database we will create a new 'stratum' user with the input 
-STRATUMPASSWORD. If your superuser connects via non-standard hosts, passwords, 
-or users be sure to externalize them.
+STRATUMPASSWORD. The stratum user will in turn create schemas for other 
+stratum_xx dataset repos.
 
-    $ export PGDATABASE=bse
-    $ export PGUSER=rdsadmin
-    $ export PGPORT=5433
-    $ export PGPASSWORD=PostGisIsMyDatabae!
-    $ export PGHOST=aws.dollar.dollar.bill
+Externalize all connection details using standard PostgreSQL default connection 
+parameter environmentals.
 
-Then run users.sql.  Replace the new stratum user password below, make a note.
+```shell
+$ export PGDATABASE=gis
+$ export PGUSER=postgres
+$ export PGPORT=5433
+$ export PGPASSWORD=PostGisIsMyDatabae!
+$ export PGHOST=aws.dollar.dollar.bill
+```
 
-Uncomment line 2 if you are re-running and wish to start from scratch.
+Our pattern for loading data into a cloud database or Minikube is to execute a 
+series of scripts from an init-data directory that sits next to all database 
+loading repos.
 
-    $ export STRATUMPASSWORD=BeMyDataBae!
-    $ #psql -t -f ./src/main/sql/definition/postgresql/teardown-users.sql 
-    $ psql -t -v v1=$STRATUMPASSWORD -v v2=$PGDATABASE -f ./src/main/sql/definition/postgresql/users.sql
+    postgis-init-data\
+        script\
+            load-stratum-user-schema.sh
+            load-stratum_bldg.sh
+        stratum\
+        stratum_bldg\
 
-# Provision Database Tables and Support Objects
+Alternatively run sample_users.sh from this repo to create users and schemas 
+only. Be sure to replace the new stratum user password below, make a note.
 
-We will connect as the newly created 'stratum' user and create empty database
-objects under each schema. Export the stratum user password as the standard 
-PGPASSWORD.
+Uncomment line 4 of sample_users.sh if you wish drop everything and start from 
+scratch.
 
-Uncomment line 3 if you want to drop all objects and then re-create.
+```shell
+$ export STRATUMPASSWORD=BeMyDataBaePostGis!
+$ ./sample_users.sh 
+```
 
-    $ export PGDATABASE=bse
-    $ export PGPASSWORD=PostGisIsMyDatabae!
-    $ #psql -t -f ./src/main/sql/definition/postgresql/teardown-schema.sql 
-    $ psql -t -f ./src/main/sql/definition/postgresql/schema.sql
+# Provision Database Tables and Support Objects Under Each Schema
 
+We will connect as the 'stratum' user and create objects under each schema. 
+Export your new stratum user password as the PGPASSWORD.
+
+Uncomment line 3 of sample_schema.sh if you want to drop all objects and 
+then re-create empty.
+
+```shell
+$ export PGPASSWORD=BeMyDataBaePostGis!
+$ ./sample_schema.sh
+```
+
+# Integration Tests
+
+Requires python 3+ in addition to psql.
+
+Should succeed for a public user on the database but stratum user is fine
+too. Externalize connection details.
+
+```shell
+$ export PGDATABASE=gis
+$ export PGPASSWORD=BeMyDataBaePostGis!
+$ python test/run_test.py "test/stratum_catalog.sql" "test/catalog_expected"
+```
 
 # Integration Tests
 
@@ -52,6 +83,6 @@ connection details.
 
 Requires python 3+ in addition to psql.
 
-    $ export PGDATABASE=bse
+    $ export PGDATABASE=gis
     $ export PGPASSWORD=BeMyDataBae!
-    $ ./src/test/run_all_tests.sh
+    $ ../stratum/src/test/run_all_tests.sh
