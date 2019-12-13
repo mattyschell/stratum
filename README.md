@@ -6,7 +6,7 @@ database, our rules, make it go viral friends.
 
 # Dependencies
 
-1. PostgreSQL with PostGIS extension (tested at PostgreSQL 10.6, PostGIS 2.5)
+1. PostgreSQL with PostGIS extension (tested at PostgreSQL 11.6, PostGIS 2.5)
 2. Privileges to create users, schemas in a pre-existing database
 3. Terminal with psql access to that database 
 
@@ -20,11 +20,19 @@ privileges for most uses in the [stratus](https://github.com/planetlabs/stratus)
 Externalize all connection details using standard PostgreSQL default connection 
 parameter environmentals.
 
-    $ export PGDATABASE=gis
-    $ export PGUSER=postgres
-    $ export PGPORT=5433
-    $ export PGPASSWORD=PostGisIsMyDatabae!
-    $ export PGHOST=aws.dollar.dollar.bill
+```shell
+$ export PGDATABASE=gis
+$ export PGUSER=postgres
+$ export PGPORT=5433
+$ export PGPASSWORD=PostGisIsMyDatabae!
+$ export PGHOST=aws.dollar.dollar.bill
+```
+
+And set one input variable to use as the new stratum user password.
+
+```shell
+$ export STRATUMPASSWORD=BeMyDataBaePostGis!
+```
 
 Our pattern for loading data into a cloud database or Minikube is to execute a 
 series of scripts from an init-data directory that sits next to all database 
@@ -43,8 +51,10 @@ only. Be sure to replace the new stratum user password below, make a note.
 Uncomment line 4 of sample_users.sh if you wish drop everything and start from 
 scratch.
 
-    $ export STRATUMPASSWORD=BeMyDataBaePostGis!
-    $ ./sample_users.sh 
+```shell
+$ export STRATUMPASSWORD=BeMyDataBaePostGis!
+$ ./sample_users.sh 
+```
 
 # Provision Database Tables and Support Objects Under Each Schema
 
@@ -54,16 +64,20 @@ Export your new stratum user password as the PGPASSWORD.
 Uncomment line 3 of sample_schema.sh if you want to drop all objects and 
 then re-create empty.
 
-    $ export PGPASSWORD=BeMyDataBaePostGis!
-    $ ./sample_schema.sh
+```shell
+$ export PGPASSWORD=BeMyDataBaePostGis!
+$ ./sample_schema.sh
+```
 
 # Integration Tests
 
-    Requires python 3+ in addition to psql.
+Requires python 3+ in addition to psql.
 
-    Should succeed for a public user on the database but stratum user is fine
-    too. Externalize connection details.
+Should succeed for a public user on the database but stratum user is fine too. 
+Externalize connection details.
 
-    $ export PGDATABASE=gis
-    $ export PGPASSWORD=BeMyDataBaePostGis!
-    $ ../stratum/src/test/run_all_tests.sh
+```shell
+$ export PGDATABASE=gis
+$ export PGPASSWORD=BeMyDataBaePostGis!
+$ ../stratum/src/test/run_all_tests.sh
+```
