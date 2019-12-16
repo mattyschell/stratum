@@ -28,6 +28,7 @@ create or replace view building (
    ,shape
 from bldg_blue.building;
 grant select on building to public;
+-- when rerun "ERROR: duplicate key" is the correct outcome
 insert into stratum_catalog.st_catalog (
     dataset_name
    ,dataset_schema

@@ -15,5 +15,8 @@ drop schema if exists basemap_green cascade;
 drop schema if exists stratum_catalog cascade;
 -- confusing, owned is privs
 reassign owned by stratum to postgres;
+reassign owned by stratum_read to postgres;
+drop owned by stratum_read;
 drop owned by stratum;  
+drop user if exists stratum_read;
 drop user if exists stratum;

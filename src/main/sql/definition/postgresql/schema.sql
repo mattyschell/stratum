@@ -1,3 +1,4 @@
+-- should call as stratum but in case of superuser or something change role
 set role stratum;
 select 'calling stratum schema.sql with user ' || current_user || ' on database ' || current_catalog || ' at ' || version(); 
 set SEARCH_PATH=stratum_catalog,public;

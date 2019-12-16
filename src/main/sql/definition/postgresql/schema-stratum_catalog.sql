@@ -1,4 +1,4 @@
-create table st_catalog (
+create table if not exists st_catalog (
 	id                      serial primary key
    ,dataset_name            varchar(64) not null
    ,dataset_schema          varchar(64) not null

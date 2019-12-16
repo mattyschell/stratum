@@ -1,4 +1,4 @@
-create table building (
+create table if not exists building (
 	objectid            serial primary key
    ,bin                 numeric(7) unique --will not allow million bins, they are maintenance 
    ,base_bbl            numeric(10)
@@ -13,10 +13,11 @@ create table building (
    ,mappluto_bbl        numeric(10)
    ,shape               geometry(multipolygon, 2263)
 ); 
-create index buildingshape on building using GIST(shape);
+create index if not exists buildingshape on building using GIST(shape);
 alter table building alter column shape set not null;
-create index buildingbase_bbl on building (base_bbl);
-create index buildingmappluto_bbl on building (mappluto_bbl);
+create index if not exists buildingbase_bbl on building (base_bbl);
+create index if not exists buildingmappluto_bbl on building (mappluto_bbl);
+-- when rerun "ERROR: duplicate key" is the correct outcome
 insert into stratum_catalog.st_catalog (
     dataset_name
    ,dataset_schema
