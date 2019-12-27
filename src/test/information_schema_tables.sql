@@ -8,6 +8,10 @@ where
     table_catalog = current_catalog
 and table_schema IN ('bldg_read'
                     ,'bldg_blue'
-                    ,'bldg_green')
+                    ,'bldg_green'
+                    ,'taxmap_read'
+                    ,'taxmap_blue'
+                    ,'taxmap_green'
+                    )
 order by table_schema
         ,table_name;

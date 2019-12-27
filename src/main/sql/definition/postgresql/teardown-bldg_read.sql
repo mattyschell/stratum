@@ -3,4 +3,4 @@ delete from
     stratum_catalog.st_catalog a
 where
     a.dataset_schema = current_schema
-and a.dataset_name = 'BUILDING';
+and a.dataset_name = 'building';
