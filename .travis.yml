@@ -2,13 +2,12 @@ language: python
 services:
   - postgresql
 addons:
-  postgresql: 10
+  postgresql: "10"
   apt:
     packages:
     - postgresql-10-postgis-2.4
 env:
   global:
-    - PGPORT=5433
     - STRATUMPASSWORD=BeMyDataBaePostGis!
 before_script:
   - chmod +x sample_users.sh
