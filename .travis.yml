@@ -1,4 +1,6 @@
 language: python
+services:
+  - postgresql
 addons:
   postgresql: 11
   apt:
@@ -10,6 +12,7 @@ env:
 before_script:
   - chmod +x sample_users.sh
   - chmod +x sample_schema.sh
+  - chmod +x src/test/run_all_tests.sh
 script:
   - "./sample_users.sh"
   - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
