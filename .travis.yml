@@ -8,10 +8,9 @@ env:
   global:
     - PGDATABASE=gis
     - STRATUMPASSWORD=BeMyDataBaePostGis!
-before_install:
+before_script:
   - psql -U postgres -d postgres -c 'create database gis;' 
-install:
+script:
   - "./sample_users.sh"
   - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
-script:
   - "./src/test/run_all_tests.sh"
