@@ -1,12 +1,14 @@
 # Stratum
 
+[![Build Status](https://travis-ci.org/mattyschell/stratum.svg?branch=master)](https://travis-ci.org/mattyschell/stratum)
+
 Data management and integration of layers under a DoITT GIS
 [stratus](https://github.com/planetlabs/stratus) deployment.  This is our 
 database, our rules, make it go viral friends.
 
 # Dependencies
 
-1. PostgreSQL with PostGIS extension (tested at PostgreSQL 11.6, PostGIS 2.5)
+1. PostgreSQL with PostGIS extension (Travis CI tests at PostgreSQL 10.7, PostGIS 2.5)
 2. Privileges to create users, schemas in a pre-existing database
 3. Terminal with psql access to that database 
 
@@ -70,6 +72,9 @@ $ ./sample_schema.sh
 ```
 
 # Integration Tests
+
+Tests that the steps above created the users, schemas, and other expected 
+database objects
 
 Requires python 3+ in addition to psql.
 
