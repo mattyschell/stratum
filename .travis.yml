@@ -2,10 +2,10 @@ language: python
 services:
   - postgresql
 addons:
-  postgresql: "10"
+  postgresql: "11"
   apt:
     packages:
-    - postgresql-10-postgis-2.4
+    - postgresql-11-postgis-2.4
 env:
   global:
     - STRATUMPASSWORD=BeMyDataBaePostGis!
