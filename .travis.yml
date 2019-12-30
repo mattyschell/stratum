@@ -17,5 +17,5 @@ before_script:
   - psql -U postgres -c "create database gis"
 script:
   - "(export PGDATABASE=gis && ./sample_users.sh)"
-  - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
+  - "(export PGPASSWORD=$STRATUMPASSWORD && export PGDATABASE=gis && ./sample_schema.sh)"
   - "./src/test/run_all_tests.sh"
