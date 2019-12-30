@@ -1,0 +1,17 @@
+language: python
+addons:
+  postgresql: "11.6"
+  apt:
+    packages:
+    - postgresql-11.6-postgis-2.5
+env:
+  global:
+    - PGDATABASE=gis
+    - STRATUMPASSWORD=BeMyDataBaePostGis!
+before_install:
+  - psql -U postgres -d postgres -c 'create database gis;' 
+install:
+  - "./sample_users.sh"
+  - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
+script:
+  - "./src/test/run_all_tests.sh"

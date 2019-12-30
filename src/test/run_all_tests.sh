@@ -1,3 +1,4 @@
+#!/bin/bash
 export PGUSER='stratum'
 python ../stratum/src/test/run_test.py "../stratum/src/test/information_schema_schemata.sql" "../stratum/src/test/schemata_expected"
 python ../stratum/src/test/run_test.py "../stratum/src/test/stratum_catalog.sql" "../stratum/src/test/catalog_expected"
