@@ -1,9 +1,9 @@
 language: python
 addons:
-  postgresql: "11.6"
+  postgresql: 11
   apt:
     packages:
-    - postgresql-11.6-postgis-2.5
+    - postgresql-11-postgis-2.5
 env:
   global:
     - PGDATABASE=gis
