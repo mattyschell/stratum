@@ -7,6 +7,9 @@ addons:
 env:
   global:
     - STRATUMPASSWORD=BeMyDataBaePostGis!
+before_script:
+  - chmod +x sample_users.sh
+  - chmod +x sample_schema.sh
 script:
   - "./sample_users.sh"
   - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
