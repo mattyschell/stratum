@@ -14,6 +14,7 @@ before_script:
   - chmod +x sample_schema.sh
   - chmod +x src/test/run_all_tests.sh
   - psql -U postgres -c "create extension postgis"
+  - psql -U postgres -c "create database gis"
 script:
   - "./sample_users.sh"
   - "(export PGPASSWORD=$STRATUMPASSWORD && ./sample_schema.sh)"
