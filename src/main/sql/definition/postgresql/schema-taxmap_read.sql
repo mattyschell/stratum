@@ -44,8 +44,8 @@ insert into stratum_catalog.st_catalog (
 values (
     'tax_lot_polygon'
    ,current_schema
-   ,'taxmap_blue'
    ,'tax_lot_polygon'
+   ,'taxmap_blue'
    ,null
    ,'NYC Dept. of Finance' 
    ,null
@@ -83,8 +83,8 @@ insert into stratum_catalog.st_catalog (
 values (
     'condo'
    ,current_schema
-   ,'taxmap_blue'
    ,'condo'
+   ,'taxmap_blue'
    ,null
    ,'NYC Dept. of Finance' 
    ,null
@@ -115,8 +115,8 @@ insert into stratum_catalog.st_catalog (
 values (
     'air_rights_condos'
    ,current_schema
-   ,'taxmap_blue'
    ,'air_rights_condos'
+   ,'taxmap_blue'
    ,null
    ,'NYC Dept. of Finance' 
    ,null

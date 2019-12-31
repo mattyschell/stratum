@@ -41,8 +41,8 @@ insert into stratum_catalog.st_catalog (
 values (
     'building'
    ,current_schema
-   ,'bldg_blue'
    ,'building'
+   ,'bldg_blue'
    ,null
    ,'NYC Dept. of Information Technology and Telecommunications' 
    ,null
