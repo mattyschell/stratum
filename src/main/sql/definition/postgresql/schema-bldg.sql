@@ -17,6 +17,8 @@ create index if not exists buildingshape on building using GIST(shape);
 alter table building alter column shape set not null;
 create index if not exists buildingbase_bbl on building (base_bbl);
 create index if not exists buildingmappluto_bbl on building (mappluto_bbl);
+-- yes I will enforce this everywhere at all times hard core
+alter table building add constraint buildingshape_check check (st_isvalid(shape));
 -- when rerun "ERROR: duplicate key" is the correct outcome
 insert into stratum_catalog.st_catalog (
     dataset_name
