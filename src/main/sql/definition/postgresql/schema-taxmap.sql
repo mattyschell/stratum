@@ -238,9 +238,25 @@ create table if not exists boundary (
 create index boundaryshape on boundary using GIST(shape);
 alter table boundary alter column shape set not null;
 alter table boundary add constraint boundaryshape_check check (st_isvalid(shape));
-
-
-
+insert into stratum_catalog.st_catalog (
+    dataset_name
+   ,dataset_schema
+   ,storage_name
+   ,storage_schema
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
+values (
+    'boundary'
+   ,current_schema
+   ,null
+   ,null
+   ,null
+   ,'NYC Dept. of Finance'
+   ,null
+   ,now()
+);
 -- condo_units
 
 -- lot_face_possession_hooks
