@@ -18,7 +18,6 @@ as select
    ,section_number
    ,volume_number
    ,page_number
-   ,lot_note --consider dropping
    ,nycmap_bldg_flag 
    ,missing_rpad_flag
    ,conversion_exception_flag
@@ -27,7 +26,6 @@ as select
    ,last_modified_date
    ,av_change 
    ,bw_change
-   ,effective_tax_year -- dirty vals in here, consider dropping
    ,bill_bbl_flag
    ,shape       
 from taxmap_blue.tax_lot_polygon;  
@@ -52,22 +50,19 @@ values (
    ,now()
 );
 -- condo
---   removing some redundant condo_ prefixes
 create or replace view condo 
 as select
     objectid
-   ,condo_boro as boro
+   ,condo_boro 
    ,condo_key
-   ,condo_name as name
-   ,condo_base_bbl as base_bbl
-   ,condo_billing_bbl as billing_bbl
-   ,condo_base_bbl_key as base_bbl_key
+   ,condo_name 
+   ,condo_base_bbl 
+   ,condo_billing_bbl 
+   ,condo_base_bbl_key
    ,air_rights_condo_flag
    ,billing_lot_not_in_cogis
    ,created_date
    ,last_modified_date
-   ,av_change
-   ,bw_change
    ,condo_number  
 from taxmap_blue.condo;
 grant select on condo to public;
@@ -91,16 +86,13 @@ values (
    ,now()
 );
 -- air_rights_condos 
---   removing some redundant condo_ prefixes
 create or replace view air_rights_condos 
 as select
     objectid
    ,condo_key
-   ,condo_base_bbl as base_bbl
-   ,condo_base_bbl_key as base_bbl_key
+   ,condo_base_bbl
+   ,condo_base_bbl_key
    ,air_rights_bbl
-   ,av_change
-   ,bw_change  
 from taxmap_blue.air_rights_condos;
 grant select on air_rights_condos to public;
 insert into stratum_catalog.st_catalog (
@@ -116,6 +108,99 @@ values (
     'air_rights_condos'
    ,current_schema
    ,'air_rights_condos'
+   ,'taxmap_blue'
+   ,null
+   ,'NYC Dept. of Finance' 
+   ,null
+   ,now()
+);
+-- air_rights_holders 
+create or replace view air_rights_holders 
+as select
+	objectid
+   ,air_rights_bbl
+   ,holding_bbl
+   ,created_date
+   ,last_modified_date
+from taxmap_blue.air_rights_holders;
+grant select on air_rights_holders to public;
+insert into stratum_catalog.st_catalog (
+    dataset_name
+   ,dataset_schema
+   ,storage_name
+   ,storage_schema
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
+values (
+    'air_rights_holders'
+   ,current_schema
+   ,'air_rights_holders'
+   ,'taxmap_blue'
+   ,null
+   ,'NYC Dept. of Finance' 
+   ,null
+   ,now()
+);
+-- air_rights_lots 
+create or replace view air_rights_lots 
+as select
+	objectid
+   ,donating_boro
+   ,donating_block
+   ,donating_lot
+   ,donating_bbl        
+   ,effective_tax_year
+   ,air_rights_lot_number
+from taxmap_blue.air_rights_lots;
+grant select on air_rights_lots to public;
+insert into stratum_catalog.st_catalog (
+    dataset_name
+   ,dataset_schema
+   ,storage_name
+   ,storage_schema
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
+values (
+    'air_rights_lots'
+   ,current_schema
+   ,'air_rights_lots'
+   ,'taxmap_blue'
+   ,null
+   ,'NYC Dept. of Finance' 
+   ,null
+   ,now()
+);
+-- boundary 
+create or replace view boundary 
+as select
+    objectid
+   ,boundary_type
+   ,type
+   ,id_number
+   ,description
+   ,length
+   ,modifier
+   ,effective_tax_year
+   shape
+from taxmap_blue.boundary;
+grant select on boundary to public;
+insert into stratum_catalog.st_catalog (
+    dataset_name
+   ,dataset_schema
+   ,storage_name
+   ,storage_schema
+   ,dataset_updated
+   ,source_agency    
+   ,spatial_reference
+   ,table_created)
+values (
+    'boundary'
+   ,current_schema
+   ,'boundary'
    ,'taxmap_blue'
    ,null
    ,'NYC Dept. of Finance' 
