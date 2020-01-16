@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/mattyschell/stratum.svg?branch=master)](https://travis-ci.org/mattyschell/stratum)
 
-Data management and integration of layers under a DoITT GIS
+Proof of concept data management and integration of layers under a DoITT GIS
 [stratus](https://github.com/planetlabs/stratus) deployment.  This is our 
-database, our rules, make it go viral friends.
+database, our rules, make it go viral friends.  
 
 # Dependencies
 
